@@ -1,14 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<p>
-<h2 class="card-title">Analyse Video Comments</h2>
-</p>
-<p></p>
-<p>
-<h5 class="card-title">Search Results for "{{ query }}"</h5>
-</p>
-<p></p>
+<div class="mt-5 p-5 text-center">
+	<h2>Analyse Video Comments</h2>
+	<p class="lead">Search Results for "{{ query }}"</p>
+	<a href="{{ url_for('home') }}" class="btn btn-success">Home</a>
+	<hr>
+</div>
 
 {% for item in query_result['items'] %}
 <div class="row">
@@ -30,25 +28,11 @@
 			</p>
 			<form class="" action="">
 				<a href="/video_comments?video_id={{ item['id']['videoId'] }}">
-					<button type="button" class="btn btn-primary">See video comment analysis</button>
+					<button type="button" class="btn btn-dark">See video comment analysis</button>
 				</a>
 			</form>
 		</div>
-
-
-
 	</div>
-
-
-
-
-	<!-- <div class="col-sm-8">
-        <div class="card">
-          <div class="card-body">
-            
-          </div>
-        </div>
-      </div> -->
 </div>
 <p></p>
 {% endfor %}

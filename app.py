@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('layout.html')
+    return render_template('index.html')
 
 @app.route('/select_video')
 def select_video():

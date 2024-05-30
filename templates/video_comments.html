@@ -1,13 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
-<p></p>
-<p><h2 class="card-title">Video Comments Report</h2></p>
-<p></p>
+
+<div class="mt-5 p-5 text-center">
+	<h1>Video Comments Report</h1>
+  <a href="{{ url_for('home') }}" class="btn btn-success">Home</a>
+  <hr>
+</div>
 
   {% for image_name in image_names %}
-  <p></p>
-  <p><img src='{{ image_name }}' alt=""></p>
-  <p></p>
+  <div class="text-center">
+    <img src='{{ image_name }}' alt="">
+  </div>
   {% endfor %}
 
 {% endblock content %}
