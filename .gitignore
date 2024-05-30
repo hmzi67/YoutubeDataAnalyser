@@ -110,3 +110,12 @@ config.py
 static/images/*
 logfiles/
 src/20191210_backup_youtube_data_module.py
+
+
+*.cfg 
+bin/
+include/
+lib/
+lib64/
+Scripts/
+share/
