@@ -65,66 +65,66 @@ def video_comments():
         # like_count_sentiment_corr=like_count_sentiment_corr
     )
 
-@app.route('/select_channels', methods=['GET', 'POST'])
-def select_channels():
-    '''This page return search results for the channel queries a user inputs and hits the 'Search Channels' button'''
-    result_dictionary = request.args
-    channel_names = []
+# @app.route('/select_channels', methods=['GET', 'POST'])
+# def select_channels():
+#     '''This page return search results for the channel queries a user inputs and hits the 'Search Channels' button'''
+#     result_dictionary = request.args
+#     channel_names = []
 
-    for channel_name in result_dictionary:
-        if len(result_dictionary.get(channel_name)) > 0:
-            channel_names.append(result_dictionary[channel_name])
+#     for channel_name in result_dictionary:
+#         if len(result_dictionary.get(channel_name)) > 0:
+#             channel_names.append(result_dictionary[channel_name])
 
-    youtube = ydt.youtubeAPIkey(API_KEY)
-    query_results = {}
+#     youtube = ydt.youtubeAPIkey(API_KEY)
+#     query_results = {}
 
-    for cn in channel_names:
-        result = ydt.youtubeSearchList(youtube, channel_id=None, q=cn, maxResults=5, type='channel')
-        query_results[cn] =  result
+#     for cn in channel_names:
+#         result = ydt.youtubeSearchList(youtube, channel_id=None, q=cn, maxResults=5, type='channel')
+#         query_results[cn] =  result
 
-    return render_template(
-        'select_channels.html',
-        query_results=query_results
-    )
+#     return render_template(
+#         'select_channels.html',
+#         query_results=query_results
+#     )
 
-@app.route('/channels', methods=['GET', 'POST'])
-def channels():
-    '''This page returns the channel coparison analysis when a user selects at least one channel with a radio button and hits "Compare channels now"'''
-    result_dictionary = request.args
+# @app.route('/channels', methods=['GET', 'POST'])
+# def channels():
+#     '''This page returns the channel coparison analysis when a user selects at least one channel with a radio button and hits "Compare channels now"'''
+#     result_dictionary = request.args
 
-    channel_ids = []
-    for c_id in result_dictionary:
-        if len(result_dictionary[c_id]) == 24:
-            channel_ids.append(result_dictionary[c_id])
+#     channel_ids = []
+#     for c_id in result_dictionary:
+#         if len(result_dictionary[c_id]) == 24:
+#             channel_ids.append(result_dictionary[c_id])
 
-    youtube = ydt.youtubeAPIkey(API_KEY)
-    video_df = ydt.get_channel_video_df(youtube, channel_ids)
+#     youtube = ydt.youtubeAPIkey(API_KEY)
+#     video_df = ydt.get_channel_video_df(youtube, channel_ids)
 
-    image_names = []
-    image_names.append(viz.barplot_channel_video_count(video_df, channel_ids))
-    image_names.append(viz.barplot_links(video_df, channel_ids))
+#     image_names = []
+#     image_names.append(viz.barplot_channel_video_count(video_df, channel_ids))
+#     image_names.append(viz.barplot_links(video_df, channel_ids))
 
-    channel_titles = []
-    for channel_id in channel_ids:
-        channel_video_df = video_df[video_df['channel_id'] == channel_id]
-        channel_title = channel_video_df['channel_title'].unique()[0]
-        channel_titles.append(channel_title)
-        image_names.append(viz.histogram_video_duration_count_single(channel_video_df, channel_id, channel_title=channel_title))
-        channel_video_series = channel_video_df['tags']
-        wordcloud_string = ydt.concat_listelements(channel_video_series)
-        image_names.append(viz.create_wordcloud(wordcloud_string, stopwords=None, video_id=channel_id, channel_title=channel_title))
+#     channel_titles = []
+#     for channel_id in channel_ids:
+#         channel_video_df = video_df[video_df['channel_id'] == channel_id]
+#         channel_title = channel_video_df['channel_title'].unique()[0]
+#         channel_titles.append(channel_title)
+#         image_names.append(viz.histogram_video_duration_count_single(channel_video_df, channel_id, channel_title=channel_title))
+#         channel_video_series = channel_video_df['tags']
+#         wordcloud_string = ydt.concat_listelements(channel_video_series)
+#         image_names.append(viz.create_wordcloud(wordcloud_string, stopwords=None, video_id=channel_id, channel_title=channel_title))
 
-    df_table = viz.top_videos(video_df, metric='view', n=5)
+#     df_table = viz.top_videos(video_df, metric='view', n=5)
 
-    return render_template(
-        'channels.html',
-        result_dictionary=result_dictionary,
-        video_df=video_df,
-        image_names=image_names,
-        channel_ids=channel_ids,
-        channel_titles=channel_titles,
-        tables=[df_table.to_html(index=False, classes='table-striped')],
-    )
+#     return render_template(
+#         'channels.html',
+#         result_dictionary=result_dictionary,
+#         video_df=video_df,
+#         image_names=image_names,
+#         channel_ids=channel_ids,
+#         channel_titles=channel_titles,
+#         tables=[df_table.to_html(index=False, classes='table-striped')],
+#     )
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

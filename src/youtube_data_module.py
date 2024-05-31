@@ -276,16 +276,16 @@ def snippets_to_dict(video_snippet_list, yt_credentials=None):
 
     return df_data
 
-def get_channel_snippet(youtube, channel_id, nextPageToken=None):
-    '''Get a cannel snippet. Take as input a string of one channel_id or a concatenated string of ids separated by commas without spaces.'''
-    request = youtube.channels().list(
-        part="snippet",
-        id=channel_id,
-        maxResults=50,
-        pageToken=nextPageToken
-    )
-    response = request.execute()
-    return response
+# def get_channel_snippet(youtube, channel_id, nextPageToken=None):
+#     '''Get a cannel snippet. Take as input a string of one channel_id or a concatenated string of ids separated by commas without spaces.'''
+#     request = youtube.channels().list(
+#         part="snippet",
+#         id=channel_id,
+#         maxResults=50,
+#         pageToken=nextPageToken
+#     )
+#     response = request.execute()
+#     return response
 
 
 def get_comment_threads(
