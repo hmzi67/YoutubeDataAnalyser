@@ -112,7 +112,7 @@ logfiles/
 src/20191210_backup_youtube_data_module.py
 
 
-*.cfg 
+pyvenv.cfg
 bin/
 include/
 lib/
