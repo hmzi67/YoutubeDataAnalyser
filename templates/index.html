@@ -3,14 +3,19 @@
 
 <div class="row d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="col-sm-8 text-center">
-      <h2>Analyse Video Comments</h2>
-      <p class="lead">Please enter a video topic you want to analyse.</p>
+      <div class="d-flex justify-content-center align-items-center">
+        <img src="../static/images/logo.png"  alt="logo" width="40" height="40">
+        <h1 class="mx-2">Analyse Video Comments</h1>
+      </div>
+      <p class="lead">Please enter a video topic you want to analyse. </p>
       <form class="form-group" action="/select_video">
         <input
           type="text"
           name="query"
           placeholder="Enter your topic name ..."
           class="form-control"
+          minlength="3"
+          required
         />
         <button class="btn btn-primary mt-2">Search Video</button>
       </form>
