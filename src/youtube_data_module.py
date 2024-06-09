@@ -73,9 +73,9 @@ def videoIdList(youtube, channelId):
     # Return a list of all public video ids (in a specific channel)
     videoIdList = []
     requestChannelsList = youtube.channels().list(
-        part="contentDetails"
-        ,id=channelId
-        ,fields='items/contentDetails/relatedPlaylists/uploads'
+        part="contentDetails",
+        id=channelId,
+        fields='items/contentDetails/relatedPlaylists/uploads',
     )
     responseChannelsList = requestChannelsList.execute()
 
@@ -116,7 +116,6 @@ def list_slice(input_list, n=50):
     return list_slices
 
 def videoSnippet(youtube, videoId, maxResults=50, part="snippet,statistics,contentDetails,player,status"):
-    
     requestSnippet = youtube.videos().list(
         part=part
         ,id=videoId
