@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="text-center">
+        <h1>402</h1>
+        <h4>Payment Required</h4>
+        <p>Oops! It looks like you've reached the API limit for this service.</p>
+        <p>Please choose another video or consider upgrading to premium access to view this content.</p>
+        <p>Thank you for your understanding.</p>
+        <a href="{{ url_for('home') }}" class="btn btn-success">Home</a>
+    </div>
+    
+</div>
+
+{% endblock content %}
