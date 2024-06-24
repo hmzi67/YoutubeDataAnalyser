@@ -65,21 +65,21 @@ def video_comments():
         
         # Calculate average negative sentiment
         negative_Sentiment = comment_sentiment['neg'].mean()
-        percentage = (negative_Sentiment / 4.0) * 100
+        percentage = (negative_Sentiment ) * 100
         negative_Average = "{:.2f}%".format(percentage)
 
         # Calculate average negative sentiment
         pos_Sentiment = comment_sentiment['pos'].mean()
-        pos_percentage = (pos_Sentiment / 4.0) * 100
+        pos_percentage = (pos_Sentiment ) * 100
         pos_Average = "{:.2f}%".format(pos_percentage)
 
         neu_Sentiment = comment_sentiment['neu'].mean()
-        neu_percentage = (neu_Sentiment / 4.0) * 100
+        neu_percentage = (neu_Sentiment ) * 100
         neu_Average = "{:.2f}%".format(neu_percentage)
 
-        compound_Sentiment = comment_sentiment['compound'].mean()
-        com_percentage = (compound_Sentiment / 4.0) * 100
-        compound_Average = "{:.2f}%".format(com_percentage)
+        # compound_Sentiment = comment_sentiment['compound'].mean()
+        # com_percentage = (compound_Sentiment ) * 100
+        compound_Average = 0 #"{:.2f}%".format(com_percentage)
 
         generatedText = 'ajkshd'
         # if negative_Sentiment > 0.10:
