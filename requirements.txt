@@ -11,3 +11,5 @@ pytz
 wordcloud
 google-generativeai
 nltk
+ipython
+python-dotenv

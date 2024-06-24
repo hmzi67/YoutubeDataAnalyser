@@ -146,16 +146,33 @@ def create_wordcloud(text, stopwords=STOPWORDS,video_id=None, channel_title=None
 def split_sentiment_pos_neg(comment_sentiment):
     # '''Split dataframe into positive, neutral and negative dataframes. Used for plotting.'''
 
+    # comment_sentiment.sort_values(by='published_at', inplace=True)
+    # comment_sentiment['count'] = 1
+    # comment_sentiment['cumsum'] = comment_sentiment['count'].cumsum()
+
+    # neg_sent = comment_sentiment[comment_sentiment['compound'] < -0.5]
+    # neg_sent['count'] = 1
+    # neg_sent['cumsum'] = neg_sent['count'].cumsum()
+    # pos_sent = comment_sentiment[comment_sentiment['compound'] > 0.5]
+    # pos_sent['count'] = 1
+    # pos_sent['cumsum'] = pos_sent['count'].cumsum()
+
+    # return comment_sentiment, pos_sent, neg_sent
+
     comment_sentiment.sort_values(by='published_at', inplace=True)
     comment_sentiment['count'] = 1
     comment_sentiment['cumsum'] = comment_sentiment['count'].cumsum()
 
-    neg_sent = comment_sentiment[comment_sentiment['compound'] < -0.5]
-    neg_sent['count'] = 1
-    neg_sent['cumsum'] = neg_sent['count'].cumsum()
-    pos_sent = comment_sentiment[comment_sentiment['compound'] > 0.5]
-    pos_sent['count'] = 1
-    pos_sent['cumsum'] = pos_sent['count'].cumsum()
+    # Filter based on sentiment score thresholds
+    neg_sent = comment_sentiment[comment_sentiment['compound'] < -0.5].copy()  # Use .copy() to avoid SettingWithCopyWarning
+    pos_sent = comment_sentiment[comment_sentiment['compound'] > 0.5].copy()   # Use .copy() to avoid SettingWithCopyWarning
+
+    # Calculate cumulative sums and counts for negative and positive separately
+    neg_sent.loc[:, 'count'] = 1  # Use .loc to set values in the original DataFrame
+    neg_sent.loc[:, 'cumsum'] = neg_sent['count'].cumsum()
+
+    pos_sent.loc[:, 'count'] = 1  # Use .loc to set values in the original DataFrame
+    pos_sent.loc[:, 'cumsum'] = pos_sent['count'].cumsum()
 
     return comment_sentiment, pos_sent, neg_sent
 
