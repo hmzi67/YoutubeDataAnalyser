@@ -77,15 +77,12 @@ def video_comments():
         neu_percentage = (neu_Sentiment ) * 100
         neu_Average = "{:.2f}%".format(neu_percentage)
 
-        # compound_Sentiment = comment_sentiment['compound'].mean()
-        # com_percentage = (compound_Sentiment ) * 100
-        compound_Average = 0 #"{:.2f}%".format(com_percentage)
 
-        generatedText = 'ajkshd'
-        # if negative_Sentiment > 0.10:
-        #     model = genai.GenerativeModel('gemini-pro')
-        #     response = model.generate_content(f"Suggest me a one video title related to this {video_title} in which I can get more positive comments")
-        #     generatedText += response.text if to_markdown(response.text) else "No response generated."
+        generatedText = ''
+        if negative_Sentiment > 0:
+            model = genai.GenerativeModel('gemini-pro')
+            response = model.generate_content(f"Suggest me a one video title related to this {video_title} in which I can get more positive comments")
+            generatedText += response.text if to_markdown(response.text) else "No response generated."
 
         return render_template(
             'video_comments.html', 
@@ -93,8 +90,7 @@ def video_comments():
             generatedText=generatedText, 
             negative_Average=negative_Average,
             pos_Average=pos_Average,
-            neu_Average=neu_Average,
-            compound_Average=compound_Average
+            neu_Average=neu_Average
             )
 
     except HTTPError as e:
