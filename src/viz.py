@@ -5,6 +5,9 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from src import sql
 import numpy as np
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+import matplotlib
+
+matplotlib.use('Agg') 
 
 # Plot configurations
 FIG_W = 10 # Width of plots

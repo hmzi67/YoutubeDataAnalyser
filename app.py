@@ -3,14 +3,12 @@ from flask import Flask, render_template, request, Response
 from src import youtube_data_module as ydt
 from src import viz
 import os
-import re
 import pandas as pd
 import logging
 import sys
 import google.generativeai as genai
-import pathlib
 import textwrap
-from IPython.display import display, Markdown
+from IPython.display import display, Markdown 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 logger = logging.getLogger('app_logger')
@@ -64,12 +62,13 @@ def video_comments():
         image_names.append(viz.scatterplot_sentiment_likecount(comment_sentiment2, pos_sent, neg_sent, video_id))
         
         # Calculate average negative sentiment
-        negative_Sentiment = comment_sentiment['pos'].mean()
+        negative_Sentiment = comment_sentiment['neg'].mean()
         percentage = (negative_Sentiment / 4.0) * 100
         negative_Average = "{:.2f}%".format(percentage)
 
         generatedText = ''
-        if negative_Sentiment > 0.10:
+
+        if negative_Sentiment > 0.0:
             model = genai.GenerativeModel('gemini-pro')
             response = model.generate_content(f"Suggest me a one video title related to this {video_title} in which I can get more positive comments")
             generatedText += response.text if to_markdown(response.text) else "No response generated."
