@@ -425,7 +425,7 @@ def get_all_comments(youtube, video_id):
     already_downloaded_replies = {}
 
     for t_id in thread_snippets:
-        if t_id['snippet']['totalReplyCount'] > 430:
+        if t_id['snippet']['totalReplyCount'] > 5000:
 
             thread_ids_with_more_replies[t_id['id']] = True
 
